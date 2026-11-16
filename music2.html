@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Encore 🎵</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <main class="page-wrapper music-wrapper">
+        <h1 class="title-hero">The Song That Reminds Me Of You </h1>
+        <p class="title-sub">One more song picked just for you. Tap the vinyl to play.</p>
+
+        <section class="glass-card vinyl-stage" aria-label="Music Player">
+            <!-- Interactive Vinyl Record Player -->
+            <div class="vinyl-disc" id="vinyl-record" role="button" tabindex="0" aria-label="Play or pause song">
+                <!-- Center Album Label (Circle Image) -->
+                <div class="vinyl-label">
+                    <img src="assets/album-cover2.jpg" onerror="this.onerror=null; this.src='assets/album-cover.jpg';" alt="Album Cover Art" class="disc-image">
+                    <div class="spindle-hole" aria-hidden="true"></div>
+                </div>
+            </div>
+
+            <!-- HTML5 Audio Element (replace src with your second song file) -->
+            <audio id="bday-song" src="assets/Hosanna.mp3" preload="auto"></audio>
+
+            <!-- Song & Player Details -->
+            <div class="track-info">
+                <h2 class="track-title">A track dedicated to the person who makes every ordinary day way better.</h2>
+                <p class="track-artist">Dedicated to You • Special Edition</p>
+
+                <!-- Interactive Status Indicator -->
+                <div class="player-status-pill" id="player-status">
+                    <span class="audio-waves" aria-hidden="true">
+                        <span class="wave-bar"></span>
+                        <span class="wave-bar"></span>
+                        <span class="wave-bar"></span>
+                    </span>
+                    <span id="player-status-text">Click record to play</span>
+                </div>
+            </div>
+        </section>
+
+        <nav class="btn-group" aria-label="Page Navigation">
+            <a href="music.html" class="btn btn-secondary">
+                <span class="icon-arrow-left" aria-hidden="true">&larr;</span> Back to Song 1
+            </a>
+            <a href="index.html" class="btn btn-primary">
+                Restart Journey ↺
+            </a>
+        </nav>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>

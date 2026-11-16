@@ -1,0 +1,703 @@
+/* ==========================================================================
+   GLOBAL STYLES & DESIGN TOKENS
+   Unified Dark Theme for Birthday Journey Website
+   ========================================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,600;0,700;1,400&display=swap');
+
+:root {
+    --bg-main: #191326;
+    --bg-card: rgba(18, 24, 38, 0.75);
+    --bg-card-hover: rgba(28, 36, 56, 0.85);
+    --border-color: rgba(255, 255, 255, 0.1);
+    --border-glow: rgba(244, 63, 94, 0.35);
+
+    /* Accent & Gradient Colors */
+    --accent-primary: #f43f5e;
+    --accent-secondary: #fb7185;
+    --accent-gold: #fbbf24;
+    --accent-purple: #8b5cf6;
+    --gradient-primary: linear-gradient(135deg, #f43f5e 0%, #ec4899 50%, #8b5cf6 100%);
+    --gradient-gold: linear-gradient(135deg, #fbbf24 0%, #f59e0b 50%, #d97706 100%);
+    --gradient-vinyl: conic-gradient(#111 0deg, #1f1f1f 45deg, #111 90deg, #1f1f1f 135deg, #111 180deg, #1f1f1f 225deg, #111 270deg, #1f1f1f 315deg, #111 360deg);
+
+    /* Text Colors */
+    --text-primary: #ffffff;
+    --text-secondary: #94a3b8;
+    --text-muted: #64748b;
+
+    /* Shadows */
+    --shadow-soft: 0 10px 30px -10px rgba(0, 0, 0, 0.5);
+    --shadow-glow: 0 0 35px rgba(244, 63, 94, 0.35);
+    --shadow-vinyl: 0 20px 40px rgba(0, 0, 0, 0.8), 0 0 50px rgba(139, 92, 246, 0.2);
+
+    /* Typography */
+    --font-heading: 'Playfair Display', Georgia, serif;
+    --font-sans: 'Outfit', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+/* Base Reset */
+*, *::before, *::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    color-scheme: dark;
+    scroll-behavior: smooth;
+}
+
+body {
+    min-height: 100vh;
+    min-height: 100dvh;
+    font-family: var(--font-sans);
+    background-color: var(--bg-main);
+    color: var(--text-primary);
+    line-height: 1.6;
+    overflow-x: hidden;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Ambient Background Lighting */
+body::before {
+    content: '';
+    position: fixed;
+    top: -15%;
+    left: 20%;
+    width: 600px;
+    height: 600px;
+    background: radial-gradient(circle, rgba(244, 63, 94, 0.15) 0%, transparent 70%);
+    pointer-events: none;
+    z-index: 0;
+    filter: blur(80px);
+}
+
+body::after {
+    content: '';
+    position: fixed;
+    bottom: -10%;
+    right: 15%;
+    width: 550px;
+    height: 550px;
+    background: radial-gradient(circle, rgba(139, 92, 246, 0.15) 0%, transparent 70%);
+    pointer-events: none;
+    z-index: 0;
+    filter: blur(80px);
+}
+
+/* ==========================================================================
+   PAGE CONTAINER & LAYOUTS
+   ========================================================================== */
+
+.page-wrapper {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 2.5rem 1.5rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    animation: fadeIn 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* Step Badge Indicator */
+.step-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.4rem 1rem;
+    border-radius: 9999px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid var(--border-color);
+    font-size: 0.825rem;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--accent-gold);
+    margin-bottom: 1.5rem;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.step-badge::before {
+    content: '✦';
+    font-size: 0.75rem;
+    color: var(--accent-gold);
+}
+
+/* Typography Helpers */
+.title-hero {
+    font-family: var(--font-heading);
+    font-size: clamp(2.5rem, 6vw, 4.5rem);
+    font-weight: 700;
+    line-height: 1.15;
+    text-align: center;
+    margin-bottom: 1rem;
+    letter-spacing: -0.02em;
+    background: var(--gradient-primary);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    filter: drop-shadow(0 2px 10px rgba(244, 63, 94, 0.3));
+}
+
+.title-sub {
+    font-size: clamp(1rem, 2.5vw, 1.25rem);
+    color: var(--text-secondary);
+    text-align: center;
+    max-width: 620px;
+    margin-bottom: 2.5rem;
+    font-weight: 300;
+}
+
+/* Glass Card Container */
+.glass-card {
+    background: var(--bg-card);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid var(--border-color);
+    border-radius: 24px;
+    padding: 2.5rem;
+    box-shadow: var(--shadow-soft);
+    position: relative;
+    overflow: hidden;
+    width: 100%;
+}
+
+.glass-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+}
+
+/* ==========================================================================
+   BUTTONS & NAVIGATION
+   ========================================================================== */
+
+.btn-group {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    margin-top: 2.5rem;
+    flex-wrap: wrap;
+}
+
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.6rem;
+    padding: 0.9rem 2.2rem;
+    font-family: var(--font-sans);
+    font-size: 1.05rem;
+    font-weight: 600;
+    border-radius: 9999px;
+    text-decoration: none;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    position: relative;
+    border: none;
+    outline: none;
+}
+
+.btn-primary {
+    background: var(--gradient-primary);
+    color: #ffffff;
+    box-shadow: 0 4px 20px rgba(244, 63, 94, 0.4);
+}
+
+.btn-primary:hover {
+    transform: translateY(-3px) scale(1.02);
+    box-shadow: 0 8px 30px rgba(244, 63, 94, 0.6);
+}
+
+.btn-primary:active {
+    transform: translateY(-1px) scale(0.99);
+}
+
+.btn-secondary {
+    background: rgba(255, 255, 255, 0.06);
+    color: var(--text-secondary);
+    border: 1px solid var(--border-color);
+    backdrop-filter: blur(8px);
+}
+
+.btn-secondary:hover {
+    background: rgba(255, 255, 255, 0.12);
+    color: var(--text-primary);
+    border-color: rgba(255, 255, 255, 0.25);
+    transform: translateY(-2px);
+}
+
+.btn .icon-arrow {
+    transition: transform 0.25s ease;
+}
+
+.btn:hover .icon-arrow {
+    transform: translateX(4px);
+}
+
+.btn:hover .icon-arrow-left {
+    transform: translateX(-4px);
+}
+
+/* ==========================================================================
+   PAGE 1: LANDING SCREEN (index.html)
+   ========================================================================== */
+
+.landing-container {
+    min-height: 85vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    position: relative;
+}
+
+.sparkle-icon {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+    display: inline-block;
+    animation: pulseGlow 2.5s infinite ease-in-out;
+}
+
+.landing-card {
+    max-width: 580px;
+    padding: 3.5rem 2.5rem;
+    text-align: center;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+/* ==========================================================================
+   PAGE 2: THE LETTER (message.html)
+   ========================================================================== */
+
+.letter-wrapper {
+    max-width: 780px;
+    width: 100%;
+}
+
+.letter-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-bottom: 1.25rem;
+    margin-bottom: 1.75rem;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.letter-stamp {
+    font-size: 0.85rem;
+    color: var(--accent-gold);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    font-weight: 600;
+}
+
+.letter-body {
+    min-height: 220px;
+    font-size: 1.15rem;
+    line-height: 1.9;
+    color: #e2e8f0;
+    font-weight: 300;
+    white-space: pre-line;
+}
+
+.letter-body p {
+    margin-bottom: 1rem;
+}
+
+/* Typed.js Cursor Customization */
+.typed-cursor {
+    color: var(--accent-primary);
+    font-size: 1.3rem;
+    font-weight: 300;
+    animation: typedBlink 0.7s infinite;
+}
+
+/* ==========================================================================
+   PAGE 3: PHOTO GALLERY (gallery.html)
+   ========================================================================== */
+.gallery-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center; /* Automatically centers the 2 cards on the bottom row */
+  align-items: center;     /* Vertically aligns mixed vertical & landscape cards cleanly */
+  gap: 1.75rem;
+  width: 100%;
+  margin-top: 1rem;
+}
+
+.gallery-item {
+  position: relative;
+  flex: 0 1 calc((100% - 3.5rem) / 3); /* Fits exactly 3 cards per row accounting for two 1.75rem gaps */
+  min-width: 280px;                   /* Wraps cleanly on mobile screens */
+  height: fit-content;                /* Prevents empty dark gaps below landscape photos */
+  border-radius: 18px;
+  overflow: hidden;
+  background: #151b28;
+  border: 1px solid var(--border-color);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+  cursor: pointer;
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s ease, border-color 0.4s ease;
+}
+
+.gallery-item img {
+  width: 100%;
+  height: auto;
+  display: block;
+  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.gallery-container {
+    width: 100%;
+    max-width: 1050px;
+}
+
+
+.gallery-item:hover {
+    transform: translateY(-6px) scale(1.02);
+    box-shadow: 0 16px 36px rgba(0, 0, 0, 0.6), var(--shadow-glow);
+    border-color: rgba(244, 63, 94, 0.5);
+}
+
+.gallery-item:hover img {
+    transform: scale(1.08);
+}
+
+.gallery-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(10, 14, 23, 0.85) 0%, rgba(10, 14, 23, 0.2) 50%, transparent 100%);
+    opacity: 0.9;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 1.25rem;
+    transition: opacity 0.3s ease;
+}
+
+.gallery-overlay h3 {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #fff;
+    margin-bottom: 0.2rem;
+}
+
+.gallery-overlay p {
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+}
+
+/* ==========================================================================
+   PAGE 4: VINYL RECORD MUSIC PLAYER (music.html)
+   ========================================================================== */
+
+.music-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    max-width: 600px;
+    width: 100%;
+    text-align: center;
+}
+
+/* Vinyl Turntable Base */
+.vinyl-stage {
+    position: relative;
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Interactive Vinyl Record */
+.vinyl-disc {
+    position: relative;
+    width: 300px;
+    height: 300px;
+    border-radius: 50%;
+    background: radial-gradient(
+        circle,
+        #0a0a0a 0%,
+        #141414 15%,
+        #111111 35%,
+        #222222 50%,
+        #0f0f0f 70%,
+        #050505 100%
+    );
+    box-shadow: var(--shadow-vinyl);
+    border: 3px solid #262626;
+    cursor: pointer;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    user-select: none;
+    -webkit-user-select: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.vinyl-disc:hover {
+    transform: scale(1.03);
+    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.9), 0 0 45px rgba(244, 63, 94, 0.35);
+}
+
+/* Realistic Vinyl Grooves Texture */
+.vinyl-disc::before {
+    content: '';
+    position: absolute;
+    inset: 12px;
+    border-radius: 50%;
+    background: repeating-radial-gradient(
+        circle,
+        transparent 0,
+        transparent 3px,
+        rgba(255, 255, 255, 0.04) 4px,
+        transparent 5px
+    );
+    pointer-events: none;
+}
+
+/* Glossy Light Reflection Sheen */
+.vinyl-disc::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: 50%;
+    background: linear-gradient(
+        135deg,
+        rgba(255, 255, 255, 0.15) 0%,
+        transparent 40%,
+        transparent 60%,
+        rgba(255, 255, 255, 0.08) 100%
+    );
+    pointer-events: none;
+}
+
+/* Center Album Label (Circle Image) */
+.vinyl-label {
+    position: relative;
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    overflow: hidden;
+    border: 5px solid #111;
+    z-index: 2;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.8);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.vinyl-label img,
+.disc-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+    display: block;
+}
+
+/* Center Spindle Hole */
+./* Center Spindle Hole */
+.spindle-hole {
+  display: none;
+}
+
+/* Spin Animation Keyframes */
+@keyframes spinRecord {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* The spinning record state */
+.vinyl-disc.spinning {
+    animation: spinRecord 6s linear infinite;
+    animation-play-state: running;
+}
+
+.vinyl-disc.paused {
+    animation-play-state: paused;
+}
+
+/* Music Status & Track Info */
+.track-info {
+    margin-top: 1.75rem;
+    text-align: center;
+}
+
+.track-title {
+    font-size: 1.4rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: 0.35rem;
+}
+
+.track-artist {
+    font-size: 0.95rem;
+    color: var(--text-secondary);
+    margin-bottom: 1rem;
+}
+
+.player-status-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    padding: 0.5rem 1.25rem;
+    border-radius: 9999px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid var(--border-color);
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: var(--accent-gold);
+    transition: all 0.3s ease;
+}
+
+.player-status-pill.playing {
+    border-color: rgba(244, 63, 94, 0.5);
+    background: rgba(244, 63, 94, 0.1);
+    color: #fda4af;
+    box-shadow: 0 0 15px rgba(244, 63, 94, 0.2);
+}
+
+/* Mini Audio Visualizer Bars */
+.audio-waves {
+    display: inline-flex;
+    align-items: flex-end;
+    gap: 3px;
+    height: 14px;
+}
+
+.wave-bar {
+    width: 3px;
+    height: 4px;
+    background-color: currentColor;
+    border-radius: 2px;
+    transition: height 0.2s ease;
+}
+
+.playing .wave-bar:nth-child(1) {
+    animation: equalize 0.8s ease-in-out infinite alternate;
+}
+.playing .wave-bar:nth-child(2) {
+    animation: equalize 0.6s ease-in-out infinite 0.2s alternate;
+}
+.playing .wave-bar:nth-child(3) {
+    animation: equalize 1s ease-in-out infinite 0.4s alternate;
+}
+
+@keyframes equalize {
+    0% { height: 4px; }
+    100% { height: 14px; }
+}
+
+/* ==========================================================================
+   ANIMATIONS & RESPONSIVE DESIGN
+   ========================================================================== */
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(18px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes pulseGlow {
+    0%, 100% {
+        transform: scale(1);
+        filter: drop-shadow(0 0 10px rgba(251, 191, 36, 0.3));
+    }
+    50% {
+        transform: scale(1.1);
+        filter: drop-shadow(0 0 25px rgba(251, 191, 36, 0.7));
+    }
+}
+
+@keyframes typedBlink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0; }
+}
+
+/* Mobile & Tablet Media Queries */
+@media (max-width: 768px) {
+    .page-wrapper {
+        padding: 2rem 1.25rem;
+    }
+
+    .glass-card {
+        padding: 2rem 1.5rem;
+        border-radius: 20px;
+    }
+
+    .title-hero {
+        font-size: 2.75rem;
+    }
+
+    .gallery-grid {
+        grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+        gap: 1.25rem;
+    }
+
+    .vinyl-disc {
+        width: 250px;
+        height: 250px;
+    }
+
+    .vinyl-label {
+        width: 100px;
+        height: 100px;
+    }
+}
+
+@media (max-width: 480px) {
+    .title-hero {
+        font-size: 2.25rem;
+    }
+
+    .title-sub {
+        font-size: 0.95rem;
+    }
+
+    .btn {
+        width: 100%;
+        padding: 0.85rem 1.5rem;
+    }
+
+    .btn-group {
+        width: 100%;
+        flex-direction: column-reverse;
+    }
+
+    .vinyl-disc {
+        width: 220px;
+        height: 220px;
+    }
+
+    .vinyl-label {
+        width: 85px;
+        height: 85px;
+    }
+}
